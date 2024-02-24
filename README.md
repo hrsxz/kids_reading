@@ -45,3 +45,65 @@ play(audio)
             seg.export(f.name, "wav")
             subprocess.call([PLAYER, "-nodisp", "-autoexit", "-hide_banner", f.name])
       ```
+
+### 发布Toga应用到iOS App Store
+
+## 开发阶段
+
+### 1. 安装必要工具
+
+- 确保安装了Python（版本3.5及以上）。
+- 安装Briefcase和Toga：
+
+```bash
+pip install briefcase toga
+```
+
+### 2.  创建应用
+
+使用Briefcase创建Toga应用：
+
+```bash
+briefcase new
+```
+
+### 3.  开发应用
+
+编辑src/<app_name>/app.py，开发应用逻辑和UI。示例代码：
+```python
+import toga
+from toga.style import Pack
+from toga.style.pack import COLUMN, CENTER
+
+def on_button_press(widget):
+    print("Hello world!")
+
+def build(app):
+    button = toga.Button(
+        'Press me!',
+        on_press=on_button_press,
+        style=Pack(padding=20)
+    )
+    return toga.Box(
+        children=[button],
+        style=Pack(direction=COLUMN, alignment=CENTER, flex=1)
+    )
+
+def main():
+    return toga.App(
+        'First Toga App',
+        'org.beeware.helloworld',
+        startup=build
+    )
+
+if __name__ == '__main__':
+    main().main_loop()
+```
+
+### 4.  本地测试
+
+在应用目录下运行应用进行测试：
+  
+  ```bash
+  briefcase dev
+  ```
